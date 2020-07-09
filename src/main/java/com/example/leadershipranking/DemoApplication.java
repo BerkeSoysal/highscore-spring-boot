@@ -55,6 +55,7 @@ class HelloContoller
 	ResponseEntity<Score> postScore(@RequestBody JsonNode score)
 	{
 		String guid = score.get("user_id").toString();
+		System.out.println(guid + "testberke");
 		UUID uuid = UUID.fromString(guid);
 		Score newScore = new Score(uuid, score.get("timestamp").asLong(), score.get("score_worth").asDouble());
 		scoreRepository.save(newScore);
