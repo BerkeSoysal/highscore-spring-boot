@@ -32,7 +32,7 @@ public class HelloContoller
 			produces = {MediaType.APPLICATION_JSON_VALUE})
     ResponseEntity<Score> postScore(@RequestBody JsonNode score)
 	{
-		String guid = "72adc49a-e016-4c62-96f7-08c872a19c6d";
+		String guid = score.get("user_id").asText();
 		System.out.println(guid);
 		UUID uuid = UUID.fromString(guid);
 		Score newScore = new Score(uuid, score.get("timestamp").asLong(), score.get("score_worth").asDouble());
