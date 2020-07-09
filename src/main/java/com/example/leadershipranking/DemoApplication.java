@@ -21,54 +21,8 @@ import java.util.UUID;
 @Controller
 @SpringBootApplication
 public class DemoApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-
-	@Bean
-	ApplicationRunner applicationRunner(ScoreRepository scoreRepository){
-		return args -> {
-		};
-	}
-
 }
 
-@RestController
-class HelloContoller
-{
-	private final ScoreRepository scoreRepository;
-
-	@GetMapping("/")
-	String hello() {
-		return "hello world";
-	}
-
-	@GetMapping("/leaderboard")
-	Iterable<Score> greetings() {
-		return scoreRepository.findAll();
-	}
-
-	@PostMapping(path = "/score/submit",
-			consumes = {MediaType.APPLICATION_JSON_VALUE},
-			produces = {MediaType.APPLICATION_JSON_VALUE})
-	ResponseEntity<Score> postScore(@RequestBody JsonNode score)
-	{
-		String guid = score.get("user_id").toString();
-		System.out.println(guid + "testberke");
-		UUID uuid = UUID.fromString(guid);
-		Score newScore = new Score(uuid, score.get("timestamp").asLong(), score.get("score_worth").asDouble());
-		scoreRepository.save(newScore);
-		return new ResponseEntity<>(newScore, HttpStatus.OK);
-	}
-
-	HelloContoller(ScoreRepository scoreRepository)
-	{
-		this.scoreRepository = scoreRepository;
-	}
-}
-
-interface ScoreRepository extends CrudRepository<Score, Long>
-{
-
-}
