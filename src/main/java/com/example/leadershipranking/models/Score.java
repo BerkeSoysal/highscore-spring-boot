@@ -69,4 +69,15 @@ public class Score
 	{
 		this.score = score;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Score{" +
+				"id=" + id.toString() +
+				", userId=" + userId.toString() +
+				", timestamp=" + timestamp +
+				", score=" + score +
+				'}';
+	}
 }
