@@ -22,6 +22,9 @@ public class Score
 	@Column(name = "score_worth")
 	private Double score;
 
+	public Score() {
+
+	}
 
 	public Score(UUID userId, Long timestamp, Double score){
 		this.id = UUID.randomUUID();
