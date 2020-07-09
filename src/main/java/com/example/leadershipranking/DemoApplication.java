@@ -10,17 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @SpringBootApplication
@@ -31,10 +24,8 @@ public class DemoApplication {
 	}
 
 	@Bean
-	ApplicationRunner applicationRunner(GreetingRepository greetingRepository){
+	ApplicationRunner applicationRunner(ScoreRepository scoreRepository){
 		return args -> {
-			greetingRepository.save(new Score("hello"));
-			greetingRepository.save(new Score("hi"));
 		};
 	}
 
@@ -43,7 +34,7 @@ public class DemoApplication {
 @RestController
 class HelloContoller
 {
-	private final GreetingRepository greetingRepository;
+	private final ScoreRepository scoreRepository;
 
 	@GetMapping("/")
 	String hello() {
@@ -52,25 +43,26 @@ class HelloContoller
 
 	@GetMapping("/leaderboard")
 	Iterable<Score> greetings() {
-		return greetingRepository.findAll();
+		return scoreRepository.findAll();
 	}
 
-	@PostMapping( consumes = {MediaType.APPLICATION_JSON_VALUE},
+	@PostMapping(path = "/score/submit",
+			consumes = {MediaType.APPLICATION_JSON_VALUE},
 			produces = {MediaType.APPLICATION_JSON_VALUE})
 	ResponseEntity<Score> postScore(@RequestBody Score score)
 	{
 			Score newScore = new Score(score.getUserId(), score.getTimestamp(), score.getScore());
-
-			return new ResponseEntity<Score>(newScore, HttpStatus.OK);
+			scoreRepository.save(newScore);
+			return new ResponseEntity<>(newScore, HttpStatus.OK);
 	}
 
-	HelloContoller(GreetingRepository greetingRepository)
+	HelloContoller(ScoreRepository scoreRepository)
 	{
-		this.greetingRepository = greetingRepository;
+		this.scoreRepository = scoreRepository;
 	}
 }
 
-interface GreetingRepository extends CrudRepository<Score, Long>
+interface ScoreRepository extends CrudRepository<Score, Long>
 {
 
 }
