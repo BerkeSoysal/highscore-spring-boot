@@ -54,9 +54,10 @@ class HelloContoller
 			produces = {MediaType.APPLICATION_JSON_VALUE})
 	ResponseEntity<Score> postScore(@RequestBody JsonNode score)
 	{
-			Score newScore = new Score(UUID.fromString(score.get("user_id").toString()), score.get("timestamp").asLong(), score.get("score").asDouble());
-			scoreRepository.save(newScore);
-			return new ResponseEntity<>(newScore, HttpStatus.OK);
+		System.out.println(score.get("user_id").toString());
+		Score newScore = new Score(UUID.fromString(score.get("user_id").toString()), score.get("timestamp").asLong(), score.get("score").asDouble());
+		scoreRepository.save(newScore);
+		return new ResponseEntity<>(newScore, HttpStatus.OK);
 	}
 
 	HelloContoller(ScoreRepository scoreRepository)
