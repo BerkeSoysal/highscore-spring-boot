@@ -13,13 +13,13 @@ public class Score
 	@GeneratedValue
 	private UUID id;
 
-	@Column
+	@Column(name = "user_id")
 	private UUID userId;
 
-	@Column
+	@Column(name = "timestamp")
 	private Long timestamp;
 
-	@Column
+	@Column(name = "score_worth")
 	private Double score;
 
 
