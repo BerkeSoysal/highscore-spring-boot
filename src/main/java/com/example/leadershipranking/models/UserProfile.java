@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.UUID;
 
 @Entity
@@ -16,8 +17,8 @@ public class UserProfile
     @Column
     private String displayName;
 
-    @Column
-    private Double points;
+    @Transient
+    private Score score;
 
     @Column
     private Long ranking;
@@ -33,7 +34,7 @@ public class UserProfile
         this.uuid = UUID.randomUUID();
         this.displayName = displayName;
         this.countryCode = countryCode;
-        this.points = 0D;
+        this.score = new Score(uuid,0,0);
     }
 
     public UUID getUuid()
