@@ -4,8 +4,11 @@ import com.example.leadershipranking.models.Score;
 import com.example.leadershipranking.models.UserProfile;
 import com.example.leadershipranking.repository.ScoreRepository;
 import com.example.leadershipranking.repository.UserProfileRepository;
+import com.example.leadershipranking.service.ScoreService;
+import com.example.leadershipranking.service.UserService;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +28,16 @@ import java.util.UUID;
 @RestController
 public class RankingContoller
 {
-	private final ScoreRepository scoreRepository;
-	private final UserProfileRepository userProfileRepository;
+
+	private final UserService userService;
+	private final ScoreService scoreService;
+
+	@Autowired
+	private RankingContoller(UserService userService, ScoreService scoreService)
+	{
+		this.userService = userService;
+		this.scoreService = scoreService;
+	}
 
 	@GetMapping("/")
 	String hello() {
@@ -55,27 +66,27 @@ public class RankingContoller
 	@PostMapping(path = "/score/submit",
 			consumes = {MediaType.APPLICATION_JSON_VALUE},
 			produces = {MediaType.APPLICATION_JSON_VALUE})
-    ResponseEntity<Score> postScore(@RequestBody JsonNode score)
+    ResponseEntity<Score> postScore(@RequestBody JsonNode jsonScore)
 	{
-		String guid = score.get("user_id").asText();
+		String guid = jsonScore.get("user_id").asText();
 		UUID uuid = UUID.fromString(guid);
 		//TODO if no userid with uuid, return false
-		Score newScore = new Score(uuid, score.get("timestamp").asLong(), score.get("score_worth").asDouble());
-		scoreRepository.save(newScore);
-		return new ResponseEntity<>(newScore, HttpStatus.OK);
+		Score score = new Score(uuid, jsonScore.get("timestamp").asLong(), jsonScore.get("score_worth").asDouble());
+		scoreService.saveScore(score);
+		return new ResponseEntity<>(score, HttpStatus.OK);
 	}
 
 	@PostMapping(path = "/user/create",
 			consumes = {MediaType.APPLICATION_JSON_VALUE},
 			produces = {MediaType.APPLICATION_JSON_VALUE})
-	ResponseEntity<UserProfile> createUser(@RequestBody JsonNode user)
+	ResponseEntity<UserProfile> createUser(@RequestBody JsonNode jsonUser)
 	{
 		UserProfile newUserProfile;
-		if(Arrays.asList(Locale.getISOCountries()).contains(user.get("country_code").asText()))
+		if(Arrays.asList(Locale.getISOCountries()).contains(jsonUser.get("country_code").asText()))
 		{
-			newUserProfile = new UserProfile(user.get("display_name").asText(), user.get("country_code").asText());
-			userProfileRepository.save(newUserProfile);
-			scoreRepository.save(newUserProfile.getScore());
+			newUserProfile = new UserProfile(jsonUser.get("display_name").asText(), jsonUser.get("country_code").asText());
+			userService.saveUser(newUserProfile);
+			scoreService.saveScore(newUserProfile.getScore());
 			return new ResponseEntity<>(newUserProfile, HttpStatus.OK);
 		}
 		else
@@ -84,9 +95,4 @@ public class RankingContoller
 		}
 	}
 
-	RankingContoller(ScoreRepository scoreRepository, UserProfileRepository userProfileRepository)
-	{
-		this.scoreRepository = scoreRepository;
-		this.userProfileRepository = userProfileRepository;
-	}
 }
