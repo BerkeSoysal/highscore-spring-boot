@@ -1,7 +1,5 @@
 package com.example.leadershipranking.models;
 
-import jdk.jfr.Name;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
