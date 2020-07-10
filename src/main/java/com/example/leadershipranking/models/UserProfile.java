@@ -57,16 +57,6 @@ public class UserProfile
         this.displayName = displayName;
     }
 
-    public Double getPoints()
-    {
-        return points;
-    }
-
-    public void setPoints(Double points)
-    {
-        this.points = points;
-    }
-
     public Long getRanking()
     {
         return ranking;
