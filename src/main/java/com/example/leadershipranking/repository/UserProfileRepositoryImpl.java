@@ -23,7 +23,8 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
     {
         Query query = entityManager.createQuery("select u from user_profile u where u.uuid = :id")
                 .setParameter("id", uuid);
-        System.out.print(query.getResultList() + "berke");
+        Query query1 = entityManager.createQuery("select u from user_profile u");
+        System.out.print(query1.getResultList() + "berke");
         return !query.getResultList().isEmpty();
     }
 }
