@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -38,11 +39,12 @@ public class RankingContoller
 	}
 
 	@GetMapping("/leaderboard/{countryCode}")
-	ResponseEntity<Score> scores(@PathVariable String countryCode) {
+	ResponseEntity<List<Score>> scores(@PathVariable String countryCode) {
 		boolean result = Arrays.asList(Locale.getISOCountries()).contains(countryCode);
 		if(result)
 		{
-			scoreRepository.findAll();
+			List<Score>  scores = (List<Score>) scoreRepository.findAll();
+			return new ResponseEntity<>(scores, HttpStatus.OK);
 		}
 		else
 		{
