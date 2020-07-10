@@ -1,7 +1,5 @@
 package com.example.leadershipranking.models;
 
-import com.example.leadershipranking.repository.ScoreRepository;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,17 +20,17 @@ public class Score
 	private Long timestamp;
 
 	@Column(name = "score_worth")
-	private Double score;
+	private Double scoreWorth;
 
 	public Score() {
 
 	}
 
-	public Score(UUID userId, Long timestamp, Double score){
+	public Score(UUID userId, Long timestamp, Double scoreWorth){
 		this.id = UUID.randomUUID();
 		this.userId = userId;
 		this.timestamp = timestamp;
-		this.score = score;
+		this.scoreWorth = scoreWorth;
 	}
 
 	public UUID getId()
@@ -65,14 +63,14 @@ public class Score
 		this.timestamp = timestamp;
 	}
 
-	public double getScore()
+	public double getScoreWorth()
 	{
-		return score;
+		return scoreWorth;
 	}
 
-	public void setScore(double score)
+	public void setScoreWorth(double score)
 	{
-		this.score = score;
+		this.scoreWorth = score;
 	}
 
 	@Override
@@ -82,7 +80,7 @@ public class Score
 				"id=" + id.toString() +
 				", userId=" + userId.toString() +
 				", timestamp=" + timestamp +
-				", score=" + score +
+				", score=" + scoreWorth +
 				'}';
 	}
 }

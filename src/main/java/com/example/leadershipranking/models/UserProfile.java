@@ -1,9 +1,5 @@
 package com.example.leadershipranking.models;
 
-import com.example.leadershipranking.repository.ScoreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.Resource;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
