@@ -5,6 +5,7 @@ import com.example.leadershipranking.models.UserProfile;
 import com.example.leadershipranking.repository.ScoreRepository;
 import com.example.leadershipranking.repository.UserProfileRepository;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +38,7 @@ public class RankingContoller
 	}
 
 	@GetMapping("/leaderboard/{countryCode}")
-	Iterable<Score> scores(@PathVariable String countryCode) {
+	ResponseEntity<Score> scores(@PathVariable String countryCode) {
 		boolean result = Arrays.asList(Locale.getISOCountries()).contains(countryCode);
 		if(result)
 		{
@@ -44,8 +46,8 @@ public class RankingContoller
 		}
 		else
 		{
-			// TODO no country code
-		}
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+ 		}
 	}
 
 	@PostMapping(path = "/score/submit",
@@ -66,10 +68,17 @@ public class RankingContoller
 			produces = {MediaType.APPLICATION_JSON_VALUE})
 	ResponseEntity<UserProfile> createUser(@RequestBody JsonNode user)
 	{
-		UserProfile newUserProfile = new UserProfile(user.get("display_name").asText(), user.get("country_code").asText());
-		userProfileRepository.save(newUserProfile);
-		return new ResponseEntity<>(newUserProfile, HttpStatus.OK);
-
+		UserProfile newUserProfile;
+		if(Arrays.asList(Locale.getISOCountries()).contains(user.get("country_code").asText()))
+		{
+			newUserProfile = new UserProfile(user.get("display_name").asText(), user.get("country_code").asText());
+			userProfileRepository.save(newUserProfile);
+			return new ResponseEntity<>(newUserProfile, HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	RankingContoller(ScoreRepository scoreRepository, UserProfileRepository userProfileRepository)
