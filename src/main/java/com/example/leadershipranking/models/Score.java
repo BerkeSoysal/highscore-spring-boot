@@ -11,6 +11,7 @@ public class Score
 {
 	@Id
 	@GeneratedValue
+	@Column(name = "score_id")
 	private UUID id;
 
 	@Column(name = "user_id")
@@ -68,19 +69,19 @@ public class Score
 		return scoreWorth;
 	}
 
-	public void setScoreWorth(double score)
+	public void setScoreWorth(Double scoreWorth)
 	{
-		this.scoreWorth = score;
+		this.scoreWorth = scoreWorth;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "Score{" +
-				"id=" + id.toString() +
-				", userId=" + userId.toString() +
+				"id=" + id +
+				", userId=" + userId +
 				", timestamp=" + timestamp +
-				", score=" + scoreWorth +
+				", scoreWorth=" + scoreWorth +
 				'}';
 	}
 }
