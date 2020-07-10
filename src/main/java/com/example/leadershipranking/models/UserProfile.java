@@ -22,13 +22,17 @@ public class UserProfile
     @Column
     private Long ranking;
 
+    @Column
+    private String countryCode;
+
     public UserProfile() {
 
     }
 
-    public UserProfile(String displayName) {
+    public UserProfile(String displayName, String countryCode) {
         this.uuid = UUID.randomUUID();
         this.displayName = displayName;
+        this.countryCode = countryCode;
         this.points = 0D;
     }
 
