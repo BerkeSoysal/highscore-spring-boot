@@ -82,4 +82,16 @@ public class UserProfile
     {
         return this.score;
     }
+
+    @Override
+    public String toString()
+    {
+        return "UserProfile{" +
+                "uuid=" + uuid +
+                ", displayName='" + displayName + '\'' +
+                ", score=" + score +
+                ", ranking=" + ranking +
+                ", countryCode='" + countryCode + '\'' +
+                '}';
+    }
 }

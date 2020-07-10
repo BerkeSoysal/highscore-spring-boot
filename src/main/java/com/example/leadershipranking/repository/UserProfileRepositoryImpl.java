@@ -1,5 +1,6 @@
 package com.example.leadershipranking.repository;
 
+import com.example.leadershipranking.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
@@ -24,7 +25,8 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
         Query query = entityManager.createQuery("select u from user_profile u where u.uuid = :id")
                 .setParameter("id", uuid);
         Query query1 = entityManager.createQuery("select u from user_profile u");
-        System.out.print(query1.getResultList() + "berke");
+        UserProfile userProfile = (UserProfile)(query1.getResultList().get(0));
+        System.out.print( userProfile.toString() + "berke");
         return !query.getResultList().isEmpty();
     }
 }
