@@ -75,6 +75,7 @@ public class RankingContoller
 		{
 			newUserProfile = new UserProfile(user.get("display_name").asText(), user.get("country_code").asText());
 			userProfileRepository.save(newUserProfile);
+			scoreRepository.save(newUserProfile.getScore());
 			return new ResponseEntity<>(newUserProfile, HttpStatus.OK);
 		}
 		else
