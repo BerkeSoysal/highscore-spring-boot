@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 @RestController
 public class RankingContoller
@@ -56,19 +55,6 @@ public class RankingContoller
 		{
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
  		}
-	}
-
-	@PostMapping(path = "/score/submit",
-			consumes = {MediaType.APPLICATION_JSON_VALUE},
-			produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Score> postScore(@RequestBody JsonNode jsonScore)
-	{
-		String guid = jsonScore.get("user_id").asText();
-		UUID uuid = UUID.fromString(guid);
-		//TODO if no userid with uuid, return false
-		Score score = new Score(uuid, jsonScore.get("timestamp").asLong(), jsonScore.get("score_worth").asDouble());
-		scoreService.saveScore(score);
-		return new ResponseEntity<>(score, HttpStatus.OK);
 	}
 
 	@PostMapping(path = "/user/create",

@@ -1,5 +1,7 @@
 package com.example.leadershipranking.models;
 
+import jdk.jfr.Name;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,23 +9,24 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "user")
 public class UserProfile
 {
     @Id
     @GeneratedValue
+    @Column(name = "user_id")
     private UUID uuid;
 
-    @Column
+    @Column(name = "display_name")
     private String displayName;
 
     @Transient
     private Score score;
 
-    @Column
+    @Column(name = "ranking")
     private Long ranking;
 
-    @Column
+    @Column(name = "country_code")
     private String countryCode;
 
     public UserProfile() {

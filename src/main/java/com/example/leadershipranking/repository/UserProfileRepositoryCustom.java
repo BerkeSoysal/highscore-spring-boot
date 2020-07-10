@@ -2,8 +2,10 @@ package com.example.leadershipranking.repository;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface ScoreRepositoryCustom
+public interface UserProfileRepositoryCustom
 {
-    public long getRanking(long userId);
+    boolean findIsUserExist(UUID uuid);
 }

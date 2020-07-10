@@ -15,13 +15,4 @@ public class ScoreRepositoryImpl implements ScoreRepositoryCustom
         return 0;
     }
 
-    /*
-    @Override
-    @org.springframework.data.jpa.repository.Query("SELECT count(*) from score where  ")
-    public long getRanking(long userId)
-    {
-        Query query = new Query();
-        scoreRepository.count();
-    }
-     */
 }
