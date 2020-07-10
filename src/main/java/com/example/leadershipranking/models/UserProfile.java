@@ -75,4 +75,14 @@ public class UserProfile
     {
         this.ranking = ranking;
     }
+
+    public String getCountryCode()
+    {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode)
+    {
+        this.countryCode = countryCode;
+    }
 }
