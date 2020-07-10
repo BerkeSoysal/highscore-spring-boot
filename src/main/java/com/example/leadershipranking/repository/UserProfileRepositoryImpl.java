@@ -22,8 +22,8 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
     public boolean findIsUserExist(UUID uuid)
     {
         Query query = entityManager.createQuery("select u from user_profile u where u.uuid = :id")
-                .setParameter("id", uuid.toString());
-
+                .setParameter("id", uuid);
+        System.out.print(query.getResultList() + "berke");
         return !query.getResultList().isEmpty();
     }
 }
