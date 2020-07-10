@@ -1,7 +1,9 @@
-package com.example.leadershipranking;
+package com.example.leadershipranking.controller;
 
 import com.example.leadershipranking.models.Score;
-import com.example.leadershipranking.models.User;
+import com.example.leadershipranking.models.UserProfile;
+import com.example.leadershipranking.repository.ScoreRepository;
+import com.example.leadershipranking.repository.UserProfileRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +19,7 @@ import java.util.UUID;
 public class RankingContoller
 {
 	private final ScoreRepository scoreRepository;
-	private final UserRepository userRepository;
+	private final UserProfileRepository userProfileRepository;
 
 	@GetMapping("/")
 	String hello() {
@@ -45,16 +47,16 @@ public class RankingContoller
 	@PostMapping(path = "/user/create",
 			consumes = {MediaType.APPLICATION_JSON_VALUE},
 			produces = {MediaType.APPLICATION_JSON_VALUE})
-	ResponseEntity<User> createUser(@RequestBody JsonNode user)
+	ResponseEntity<UserProfile> createUser(@RequestBody JsonNode user)
 	{
-		User newUser = new User(user.get("display_name").asText());
-		userRepository.save(newUser);
-		return new ResponseEntity<>(newUser, HttpStatus.OK);
+		UserProfile newUserProfile = new UserProfile(user.get("display_name").asText());
+		userProfileRepository.save(newUserProfile);
+		return new ResponseEntity<>(newUserProfile, HttpStatus.OK);
 	}
 
-	RankingContoller(ScoreRepository scoreRepository, UserRepository userRepository)
+	RankingContoller(ScoreRepository scoreRepository, UserProfileRepository userProfileRepository)
 	{
 		this.scoreRepository = scoreRepository;
-		this.userRepository = userRepository;
+		this.userProfileRepository = userProfileRepository;
 	}
 }

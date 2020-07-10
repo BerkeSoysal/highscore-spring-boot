@@ -1,9 +1,7 @@
-package com.example.leadershipranking;
+package com.example.leadershipranking.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-
-import javax.management.Query;
 
 public class ScoreRepositoryImpl implements ScoreRepositoryCustom
 {

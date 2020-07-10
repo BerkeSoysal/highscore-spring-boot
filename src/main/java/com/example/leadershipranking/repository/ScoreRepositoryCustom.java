@@ -1,4 +1,4 @@
-package com.example.leadershipranking;
+package com.example.leadershipranking.repository;
 
 public interface ScoreRepositoryCustom
 {

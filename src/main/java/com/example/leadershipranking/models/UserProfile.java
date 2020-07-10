@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity
-public class User
+public class UserProfile
 {
     @Id
     @GeneratedValue
@@ -22,11 +22,11 @@ public class User
     @Column
     private Long ranking;
 
-    public User() {
+    public UserProfile() {
 
     }
 
-    public User(String displayName) {
+    public UserProfile(String displayName) {
         this.uuid = UUID.randomUUID();
         this.displayName = displayName;
         this.points = 0D;

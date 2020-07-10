@@ -1,4 +1,4 @@
-package com.example.leadershipranking;
+package com.example.leadershipranking.config;
 
 import com.zaxxer.hikari.*;
 import org.springframework.beans.factory.annotation.Value;
