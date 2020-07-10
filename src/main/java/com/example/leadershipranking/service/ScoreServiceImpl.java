@@ -3,9 +3,9 @@ package com.example.leadershipranking.service;
 import com.example.leadershipranking.models.Score;
 import com.example.leadershipranking.repository.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-@Qualifier
+@Service
 public class ScoreServiceImpl implements ScoreService
 {
     private ScoreRepository scoreRepository;

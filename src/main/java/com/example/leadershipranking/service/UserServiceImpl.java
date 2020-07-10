@@ -3,9 +3,9 @@ package com.example.leadershipranking.service;
 import com.example.leadershipranking.models.UserProfile;
 import com.example.leadershipranking.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
-@Qualifier
+@Service
 public class UserServiceImpl implements UserService
 {
     private UserProfileRepository userProfileRepository;
