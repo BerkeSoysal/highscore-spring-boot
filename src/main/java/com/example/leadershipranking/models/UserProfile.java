@@ -2,7 +2,6 @@ package com.example.leadershipranking.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.util.UUID;
@@ -11,7 +10,6 @@ import java.util.UUID;
 public class UserProfile
 {
     @Id
-    @GeneratedValue
     @Column(name = "user_id")
     private UUID uuid;
 
