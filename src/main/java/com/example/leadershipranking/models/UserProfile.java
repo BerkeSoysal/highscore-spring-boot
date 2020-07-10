@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.util.UUID;
 
-@Entity(name = "user")
+@Entity(name = "user_profile")
 public class UserProfile
 {
     @Id
