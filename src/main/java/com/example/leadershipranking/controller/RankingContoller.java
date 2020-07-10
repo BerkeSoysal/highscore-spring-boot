@@ -67,6 +67,8 @@ public class RankingContoller
 		{
 			newUserProfile = new UserProfile(jsonUser.get("display_name").asText(), jsonUser.get("country_code").asText());
 			userService.saveUser(newUserProfile);
+			System.out.println(newUserProfile.getUuid() + "newuser uid");
+			System.out.println(newUserProfile.getScore().getId() + "score");
 			scoreService.saveScore(newUserProfile.getScore());
 			return new ResponseEntity<>(newUserProfile, HttpStatus.OK);
 		}
