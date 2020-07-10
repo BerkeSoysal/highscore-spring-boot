@@ -7,6 +7,8 @@ public interface ScoreService
 {
     void saveScore(Score score);
 
+    void updateScore(Score score);
+
     Iterable<Score> getRankings();
 
     Object getRankingsByCountry(String countryCode);

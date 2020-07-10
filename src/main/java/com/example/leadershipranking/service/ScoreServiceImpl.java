@@ -2,6 +2,7 @@ package com.example.leadershipranking.service;
 
 import com.example.leadershipranking.models.Score;
 import com.example.leadershipranking.repository.ScoreRepository;
+import com.example.leadershipranking.repository.ScoreRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,17 +10,25 @@ import org.springframework.stereotype.Service;
 public class ScoreServiceImpl implements ScoreService
 {
     private final ScoreRepository scoreRepository;
+    private final ScoreRepositoryCustom scoreRepositoryCustom;
 
     @Autowired
-    public ScoreServiceImpl(ScoreRepository scoreRepository)
+    public ScoreServiceImpl(ScoreRepository scoreRepository, ScoreRepositoryCustom scoreRepositoryCustom)
     {
         this.scoreRepository = scoreRepository;
+        this.scoreRepositoryCustom = scoreRepositoryCustom;
     }
 
     @Override
     public void saveScore(Score score)
     {
         scoreRepository.save(score);
+    }
+
+    @Override
+    public void updateScore(Score score)
+    {
+        scoreRepositoryCustom.updateScore(score);
     }
 
     @Override
