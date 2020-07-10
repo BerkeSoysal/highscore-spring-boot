@@ -6,5 +6,9 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ScoreService
 {
-    public void saveScore(Score score);
+    void saveScore(Score score);
+
+    Iterable<Score> getRankings();
+
+    Object getRankingsByCountry(String countryCode);
 }

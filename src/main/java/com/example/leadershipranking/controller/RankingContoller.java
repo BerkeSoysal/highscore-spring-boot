@@ -46,7 +46,7 @@ public class RankingContoller
 
 	@GetMapping("/leaderboard")
 	Iterable<Score> greetings() {
-		return scoreRepository.findAll();
+		return scoreService.getRankings();
 	}
 
 	@GetMapping("/leaderboard/{countryCode}")
@@ -54,7 +54,7 @@ public class RankingContoller
 		boolean result = Arrays.asList(Locale.getISOCountries()).contains(countryCode);
 		if(result)
 		{
-			List<Score>  scores = (List<Score>) scoreRepository.findAll();
+			List<Score>  scores = (List<Score>) scoreService.getRankingsByCountry(countryCode);
 			return new ResponseEntity<>(scores, HttpStatus.OK);
 		}
 		else

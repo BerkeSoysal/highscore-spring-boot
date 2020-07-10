@@ -14,10 +14,21 @@ public class ScoreServiceImpl implements ScoreService
         this.scoreRepository = scoreRepository;
     }
 
-
     @Override
     public void saveScore(Score score)
     {
         scoreRepository.save(score);
+    }
+
+    @Override
+    public Iterable<Score> getRankings()
+    {
+        return scoreRepository.findAll();
+    }
+
+    @Override
+    public Object getRankingsByCountry(String countryCode)
+    {
+        return scoreRepository.findAll();
     }
 }
