@@ -11,10 +11,10 @@ public class Score
 {
 	@Id
 	@GeneratedValue
-	private String id;
+	private UUID id;
 
 	@Column(name = "user_id")
-	private String userId;
+	private UUID userId;
 
 	@Column(name = "timestamp")
 	private Long timestamp;
@@ -26,29 +26,29 @@ public class Score
 
 	}
 
-	public Score(String userId, Long timestamp, Double scoreWorth){
-		this.id = UUID.randomUUID().toString();
+	public Score(UUID userId, Long timestamp, Double scoreWorth){
+		this.id = UUID.randomUUID();
 		this.userId = userId;
 		this.timestamp = timestamp;
 		this.scoreWorth = scoreWorth;
 	}
 
-	public String getId()
+	public UUID getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(UUID id)
 	{
 		this.id = id;
 	}
 
-	public String getUserId()
+	public UUID getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId(String userId)
+	public void setUserId(UUID userId)
 	{
 		this.userId = userId;
 	}

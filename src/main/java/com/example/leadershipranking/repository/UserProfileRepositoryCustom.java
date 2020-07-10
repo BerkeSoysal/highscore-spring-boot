@@ -7,5 +7,5 @@ import java.util.UUID;
 @Repository
 public interface UserProfileRepositoryCustom
 {
-    boolean findIsUserExist(String uuid);
+    boolean findIsUserExist(UUID uuid);
 }
