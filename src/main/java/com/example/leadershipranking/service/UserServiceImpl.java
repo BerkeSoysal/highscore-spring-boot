@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public boolean userExistsWithId(UUID userId)
+    public boolean userExistsWithId(String userId)
     {
         return userProfileRepositoryCustom.findIsUserExist(userId);
     }

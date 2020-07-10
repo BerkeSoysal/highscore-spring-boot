@@ -9,5 +9,5 @@ public interface UserService
 {
     void saveUser(UserProfile user);
 
-    boolean userExistsWithId(UUID userId);
+    boolean userExistsWithId(String userId);
 }

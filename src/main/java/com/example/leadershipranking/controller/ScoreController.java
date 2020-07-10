@@ -34,10 +34,10 @@ public class ScoreController
     {
         UUID userId = UUID.fromString(jsonScore.get("user_id").asText());
 
-        boolean userExists = userService.userExistsWithId(userId);
+        boolean userExists = userService.userExistsWithId(userId.toString());
         if(userExists)
         {
-            Score score = new Score(userId, jsonScore.get("timestamp").asLong(), jsonScore.get("score_worth").asDouble());
+            Score score = new Score(userId.toString(), jsonScore.get("timestamp").asLong(), jsonScore.get("score_worth").asDouble());
             scoreService.saveScore(score);
             return new ResponseEntity<>(score, HttpStatus.OK);
         }

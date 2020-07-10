@@ -13,7 +13,7 @@ public class UserProfile
     @Id
     @GeneratedValue
     @Column(name = "user_id")
-    private UUID uuid;
+    private String uuid;
 
     @Column(name = "display_name")
     private String displayName;
@@ -32,18 +32,18 @@ public class UserProfile
     }
 
     public UserProfile(String displayName, String countryCode) {
-        this.uuid = UUID.randomUUID();
+        this.uuid = UUID.randomUUID().toString();
         this.displayName = displayName;
         this.countryCode = countryCode;
         this.score = new Score(uuid,0L,0D);
     }
 
-    public UUID getUuid()
+    public String getUuid()
     {
         return uuid;
     }
 
-    public void setUuid(UUID uuid)
+    public void setUuid(String uuid)
     {
         this.uuid = uuid;
     }
