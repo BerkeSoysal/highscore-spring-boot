@@ -34,7 +34,7 @@ public class UserProfile
         this.uuid = UUID.randomUUID();
         this.displayName = displayName;
         this.countryCode = countryCode;
-        this.score = new Score(uuid,0L,0);
+        this.score = new Score(uuid,0L,0D);
     }
 
     public UUID getUuid()
