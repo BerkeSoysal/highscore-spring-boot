@@ -35,7 +35,6 @@ public class ScoreController
         UUID userId = UUID.fromString(jsonScore.get("user_id").asText());
 
         boolean userExists = userService.userExistsWithId(userId);
-        //TODO if no userid with uuid, return false
         if(userExists)
         {
             Score score = new Score(userId, jsonScore.get("timestamp").asLong(), jsonScore.get("score_worth").asDouble());
