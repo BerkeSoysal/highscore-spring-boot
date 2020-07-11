@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 public class ScoreRepositoryImpl implements ScoreRepositoryCustom
@@ -25,6 +26,7 @@ public class ScoreRepositoryImpl implements ScoreRepositoryCustom
     }
 
     @Override
+    @Transactional
     public Score updateScore(UUID uuid)
     {
         Score score = entityManager.find(Score.class , uuid);
