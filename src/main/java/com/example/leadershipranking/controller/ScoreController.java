@@ -38,7 +38,7 @@ public class ScoreController
         if(userExists)
         {
             Score score = new Score(userId, jsonScore.get("timestamp").asLong(), jsonScore.get("score_worth").asDouble());
-            scoreService.saveScore(score);
+            scoreService.updateScore(userId);
             return new ResponseEntity<>(score, HttpStatus.OK);
         }
 

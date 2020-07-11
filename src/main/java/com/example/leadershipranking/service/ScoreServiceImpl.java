@@ -6,6 +6,8 @@ import com.example.leadershipranking.repository.ScoreRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ScoreServiceImpl implements ScoreService
 {
@@ -26,9 +28,9 @@ public class ScoreServiceImpl implements ScoreService
     }
 
     @Override
-    public void updateScore(Score score)
+    public void updateScore(UUID uuid)
     {
-        scoreRepositoryCustom.updateScore(score);
+        scoreRepositoryCustom.updateScore(uuid);
     }
 
     @Override

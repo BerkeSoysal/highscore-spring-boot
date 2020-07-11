@@ -12,9 +12,6 @@ public class Score
 	@Column(name = "score_id")
 	private UUID id;
 
-	@Column(name = "user_id")
-	private UUID userId;
-
 	@Column(name = "timestamp")
 	private Long timestamp;
 
@@ -26,8 +23,7 @@ public class Score
 	}
 
 	public Score(UUID userId, Long timestamp, Double scoreWorth){
-		this.id = UUID.randomUUID();
-		this.userId = userId;
+		this.id = userId;
 		this.timestamp = timestamp;
 		this.scoreWorth = scoreWorth;
 	}
@@ -40,16 +36,6 @@ public class Score
 	public void setId(UUID id)
 	{
 		this.id = id;
-	}
-
-	public UUID getUserId()
-	{
-		return userId;
-	}
-
-	public void setUserId(UUID userId)
-	{
-		this.userId = userId;
 	}
 
 	public Long getTimestamp()
@@ -77,7 +63,6 @@ public class Score
 	{
 		return "Score{" +
 				"id=" + id +
-				", userId=" + userId +
 				", timestamp=" + timestamp +
 				", scoreWorth=" + scoreWorth +
 				'}';

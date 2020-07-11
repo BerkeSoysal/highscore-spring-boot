@@ -1,8 +1,8 @@
 package com.example.leadershipranking.repository;
 
 import com.example.leadershipranking.models.UserProfile;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserProfileRepository extends CrudRepository<UserProfile, Long>
+public interface UserProfileRepository extends JpaRepository<UserProfile, Long>
 {
 }
