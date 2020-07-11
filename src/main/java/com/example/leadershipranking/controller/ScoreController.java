@@ -37,8 +37,7 @@ public class ScoreController
         boolean userExists = userService.userExistsWithId(userId);
         if(userExists)
         {
-            Score score = new Score(userId, jsonScore.get("timestamp").asLong(), jsonScore.get("score_worth").asDouble());
-            scoreService.updateScore(userId);
+            Score score = scoreService.updateScore(userId);
             return new ResponseEntity<>(score, HttpStatus.OK);
         }
 

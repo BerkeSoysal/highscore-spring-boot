@@ -9,7 +9,7 @@ public interface ScoreService
 {
     void saveScore(Score score);
 
-    void updateScore(UUID uuid);
+    Score updateScore(UUID uuid);
 
     Iterable<Score> getRankings();
 

@@ -1,5 +1,6 @@
 package com.example.leadershipranking.repository;
 
+import com.example.leadershipranking.models.Score;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
@@ -9,5 +10,5 @@ public interface ScoreRepositoryCustom
 {
     long getRanking(long userId);
 
-    void updateScore(UUID uuid);
+    Score updateScore(UUID uuid);
 }

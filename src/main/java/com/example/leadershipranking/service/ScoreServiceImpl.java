@@ -28,9 +28,9 @@ public class ScoreServiceImpl implements ScoreService
     }
 
     @Override
-    public void updateScore(UUID uuid)
+    public Score updateScore(UUID uuid)
     {
-        scoreRepositoryCustom.updateScore(uuid);
+        return scoreRepositoryCustom.updateScore(uuid);
     }
 
     @Override

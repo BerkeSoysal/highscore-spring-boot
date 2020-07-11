@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.UUID;
 
 public class ScoreRepositoryImpl implements ScoreRepositoryCustom
@@ -26,10 +25,12 @@ public class ScoreRepositoryImpl implements ScoreRepositoryCustom
     }
 
     @Override
-    public void updateScore(UUID uuid)
+    public Score updateScore(UUID uuid)
     {
         Score score = entityManager.find(Score.class , uuid);
         score.setScoreWorth(233D);
+        entityManager.persist(score);
+        return score;
     }
 
 }
