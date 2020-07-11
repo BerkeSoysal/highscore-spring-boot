@@ -33,11 +33,12 @@ public class ScoreController
     public ResponseEntity<Score> postScore(@RequestBody JsonNode jsonScore)
     {
         UUID userId = UUID.fromString(jsonScore.get("user_id").asText());
-
+        Score score = new Score(userId,jsonScore.get("timestamp").asLong(),
+                jsonScore.get("score_worth").asDouble());
         boolean userExists = userService.userExistsWithId(userId);
         if(userExists)
         {
-            Score score = scoreService.updateScore(userId);
+            scoreService.updateScore(score);
             return new ResponseEntity<>(score, HttpStatus.OK);
         }
 

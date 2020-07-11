@@ -27,11 +27,12 @@ public class ScoreRepositoryImpl implements ScoreRepositoryCustom
 
     @Override
     @Transactional
-    public Score updateScore(UUID uuid)
+    public Score updateScore(Score score)
     {
-        Score score = entityManager.find(Score.class , uuid);
-        score.setScoreWorth(233D);
-        entityManager.persist(score);
+        Score scoreDb = entityManager.find(Score.class , score.getId());
+        scoreDb.setScoreWorth(score.getScoreWorth());
+        scoreDb.setTimestamp(score.getTimestamp());
+        entityManager.persist(scoreDb);
         return score;
     }
 
