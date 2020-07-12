@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(name = "user_profile")
+@JsonFilter("leaderBoard")
 public class UserProfile implements Serializable
 {
     @Id
