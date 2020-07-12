@@ -36,20 +36,16 @@ public class RankingController
 	}
 
 	@GetMapping("/leaderboard")
-	public ResponseEntity<MappingJacksonValue> scoreBoard()
+	public ResponseEntity<List<UserProfile>> scoreBoard()
 	{
 		List<UserProfile> userProfiles = userService.getUsersOrderByRank(null);
-
-		MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userProfiles);
-		FilterProvider filterProvider = new SimpleFilterProvider()
-				.addFilter("leaderBoard", SimpleBeanPropertyFilter.serializeAllExcept("user_id"));
-		mappingJacksonValue.setFilters(filterProvider);
-		return new ResponseEntity<>(mappingJacksonValue, HttpStatus.OK);
+		return new ResponseEntity<>(userProfiles, HttpStatus.OK);
 	}
 
 	@GetMapping("/leaderboard/{countryCode}")
 	public ResponseEntity<List<UserProfile>> scores(@PathVariable String countryCode)
 	{
+		countryCode = countryCode.toUpperCase();
 		boolean result = Arrays.asList(Locale.getISOCountries()).contains(countryCode);
 		if(result)
 		{
