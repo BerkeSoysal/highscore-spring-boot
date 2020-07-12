@@ -34,4 +34,13 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
                 .setParameter("points", user.getPoints());
         user.setRanking((long) query.getResultList().size() + 1);
     }
+
+    @Override
+    public UserProfile findUserById(UUID userId)
+    {
+        Query query = entityManager.createQuery("select u from user_profile u where u.uuid = :uuid")
+                .setParameter("uuid", userId)
+                .setMaxResults(1);
+        return  (UserProfile) query.getSingleResult();
+    }
 }

@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public void loadUser(UUID userId)
+    public UserProfile loadUser(UUID userId)
     {
-        //userProfileRepository.
+        return userProfileRepositoryCustom.findUserById(userId);
     }
 
     @Override
