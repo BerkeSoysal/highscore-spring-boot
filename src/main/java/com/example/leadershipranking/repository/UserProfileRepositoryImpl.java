@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.UUID;
@@ -45,7 +46,7 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
                 .setMaxResults(1);
         try {
             userProfile = (UserProfile) query.getSingleResult();
-        } catch (EmptyResultDataAccessException e){
+        } catch (NoResultException e){
             e.printStackTrace();
         }
 
