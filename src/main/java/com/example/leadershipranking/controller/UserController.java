@@ -11,10 +11,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 @RestController
 public class UserController
@@ -32,20 +35,21 @@ public class UserController
     @PostMapping(path = "/user/create",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<JSONObject> createUser(@RequestBody JsonNode jsonUser)
+    @ResponseBody
+    public ResponseEntity<Map> createUser(@RequestBody JsonNode jsonUser)
     {
         UserProfile userProfile;
         if(Arrays.asList(Locale.getISOCountries()).contains(jsonUser.get("country_code").asText()))
         {
             userProfile = new UserProfile(jsonUser.get("display_name").asText(), jsonUser.get("country_code").asText());
             userService.saveUser(userProfile);
-            JSONObject json = new JSONObject();
-            json.put("user_id", userProfile.getUuid());
-            json.put("display_name", userProfile.getDisplayName());
-            json.put("points", userProfile.getPoints());
-            json.put("rank", userProfile.getRanking());
+            Map<String,Object> map = new HashMap<>();
+            map.put("user_id", userProfile.getUuid());
+            map.put("display_name", userProfile.getDisplayName());
+            map.put("points", userProfile.getPoints());
+            map.put("rank", userProfile.getRanking());
 
-            return new ResponseEntity<>(json, HttpStatus.OK);
+            return new ResponseEntity<>(map, HttpStatus.OK);
         }
         else
         {
