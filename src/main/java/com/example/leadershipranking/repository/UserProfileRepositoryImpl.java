@@ -79,4 +79,12 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
             entityManager.persist(userProfile);
         }
     }
+
+    @Override
+    public List<UserProfile> getUsersOrderByRank()
+    {
+        Query query = entityManager.createQuery("select u from user_profile u order by u.ranking");
+
+        return query.getResultList();
+    }
 }
