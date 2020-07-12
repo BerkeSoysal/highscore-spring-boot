@@ -40,4 +40,10 @@ public class UserServiceImpl implements UserService
     {
         return userProfileRepositoryCustom.findIsUserExist(userId);
     }
+
+    @Override
+    public UserProfile updateUserScore(UUID uuid, double points)
+    {
+        return userProfileRepositoryCustom.updateUserPoints(uuid, points);
+    }
 }

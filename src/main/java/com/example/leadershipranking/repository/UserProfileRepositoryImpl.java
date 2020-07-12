@@ -1,5 +1,6 @@
 package com.example.leadershipranking.repository;
 
+import com.example.leadershipranking.models.Score;
 import com.example.leadershipranking.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
@@ -51,5 +53,15 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
         }
 
         return  userProfile;
+    }
+
+    @Override
+    @Transactional
+    public UserProfile updateUserPoints(UUID uuid, double points)
+    {
+        UserProfile user = entityManager.find(UserProfile.class , uuid);
+        user.setPoints(user.getPoints() + points);
+        entityManager.persist(user);
+        return user;
     }
 }

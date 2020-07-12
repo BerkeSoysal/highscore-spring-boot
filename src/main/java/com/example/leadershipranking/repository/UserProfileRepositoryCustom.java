@@ -16,4 +16,6 @@ public interface UserProfileRepositoryCustom
     void setRanking(UserProfile user);
 
     UserProfile findUserById(UUID userId);
+
+    UserProfile updateUserPoints(UUID uuid, double points);
 }

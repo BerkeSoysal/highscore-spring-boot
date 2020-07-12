@@ -1,6 +1,6 @@
 package com.example.leadershipranking.controller;
 
-import com.example.leadershipranking.models.Score;
+import com.example.leadershipranking.models.UserProfile;
 import com.example.leadershipranking.service.ScoreService;
 import com.example.leadershipranking.service.UserService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,19 +30,17 @@ public class ScoreController
     @PostMapping(path = "/score/submit",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Score> postScore(@RequestBody JsonNode jsonScore)
+    public ResponseEntity<UserProfile> postScore(@RequestBody JsonNode jsonScore)
     {
         UUID userId = UUID.fromString(jsonScore.get("user_id").asText());
-        Score score = new Score(userId,jsonScore.get("timestamp").asLong(),
-                jsonScore.get("score_worth").asDouble());
-        boolean userExists = userService.userExistsWithId(userId);
-        if(userExists)
+        UserProfile userProfile = userService.loadUser(userId);
+
+        if (null == userProfile)
         {
-            scoreService.updateScore(score);
-            return new ResponseEntity<>(score, HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
+        userService.updateUserScore(userId, jsonScore.get("score_worth").asDouble());
+        return new ResponseEntity<>(userService.loadUser(userId), HttpStatus.OK);
     }
 }

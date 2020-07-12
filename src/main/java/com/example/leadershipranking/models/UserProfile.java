@@ -26,7 +26,7 @@ public class UserProfile implements Serializable
 
     @Column(name = "points")
     @JsonProperty("points")
-    private Long points;
+    private Double points;
 
     @Column(name = "country_code")
     @JsonProperty("country_code")
@@ -41,7 +41,7 @@ public class UserProfile implements Serializable
         this.uuid = UUID.randomUUID();
         this.displayName = displayName;
         this.countryCode = countryCode;
-        this.points = 0L;
+        this.points = 0d;
     }
 
     public UUID getUuid()
@@ -84,12 +84,12 @@ public class UserProfile implements Serializable
         this.countryCode = countryCode;
     }
 
-    public Long getPoints()
+    public Double getPoints()
     {
         return points;
     }
 
-    public void setPoints(Long points)
+    public void setPoints(Double points)
     {
         this.points = points;
     }

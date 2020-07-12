@@ -12,4 +12,6 @@ public interface UserService
     UserProfile loadUser(UUID userId);
 
     boolean userExistsWithId(UUID userId);
+
+    UserProfile updateUserScore(UUID uuid, double points);
 }
