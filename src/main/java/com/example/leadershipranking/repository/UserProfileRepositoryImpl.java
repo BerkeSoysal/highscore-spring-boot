@@ -3,6 +3,7 @@ package com.example.leadershipranking.repository;
 import com.example.leadershipranking.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,9 +39,16 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
     @Override
     public UserProfile findUserById(UUID userId)
     {
+        UserProfile userProfile = null;
         Query query = entityManager.createQuery("select u from user_profile u where u.uuid = :uuid")
                 .setParameter("uuid", userId)
                 .setMaxResults(1);
-        return  (UserProfile) query.getSingleResult();
+        try {
+            userProfile = (UserProfile) query.getSingleResult();
+        } catch (EmptyResultDataAccessException e){
+            e.printStackTrace();
+        }
+
+        return  userProfile;
     }
 }
