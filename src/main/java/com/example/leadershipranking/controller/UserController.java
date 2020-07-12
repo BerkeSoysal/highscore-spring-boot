@@ -62,11 +62,12 @@ public class UserController
     {
         UUID userId = UUID.fromString(jsonScore.get("user_id").asText());
         UserProfile userProfile = userService.loadUser(userId);
-        double oldPoints = userProfile.getPoints();
         if (null == userProfile)
         {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+        double oldPoints = userProfile.getPoints();
+
 
         userService.updateUserScore(userId, jsonScore.get("score_worth").asDouble());
         userProfile = userService.loadUser(userId);

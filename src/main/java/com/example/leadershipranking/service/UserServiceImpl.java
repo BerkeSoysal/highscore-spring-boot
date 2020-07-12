@@ -36,11 +36,6 @@ public class UserServiceImpl implements UserService
         return userProfileRepositoryCustom.findUserById(userId);
     }
 
-    @Override
-    public boolean userExistsWithId(UUID userId)
-    {
-        return userProfileRepositoryCustom.findIsUserExist(userId);
-    }
 
     @Override
     public UserProfile updateUserScore(UUID uuid, double points)
