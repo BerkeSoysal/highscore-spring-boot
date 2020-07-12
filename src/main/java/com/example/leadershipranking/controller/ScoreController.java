@@ -17,13 +17,11 @@ import java.util.UUID;
 @RestController
 public class ScoreController
 {
-    private final ScoreService scoreService;
     private final UserService userService;
 
     @Autowired
-    public ScoreController(ScoreService scoreService, UserService userService)
+    public ScoreController(UserService userService)
     {
-        this.scoreService = scoreService;
         this.userService = userService;
     }
 
@@ -41,6 +39,8 @@ public class ScoreController
         }
 
         userService.updateUserScore(userId, jsonScore.get("score_worth").asDouble());
+        userProfile = userService.loadUser(userId);
+        userService.updateRankingsLowerThan(userProfile.getPoints());
         return new ResponseEntity<>(userService.loadUser(userId), HttpStatus.OK);
     }
 }

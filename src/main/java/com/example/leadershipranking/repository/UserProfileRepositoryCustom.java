@@ -17,5 +17,7 @@ public interface UserProfileRepositoryCustom
 
     UserProfile findUserById(UUID userId);
 
-    UserProfile updateUserPoints(UUID uuid, double points);
+    UserProfile updateUserPointsAndRanking(UUID uuid, double points);
+
+    void updateRankingsLowerThan(Double points);
 }

@@ -14,4 +14,6 @@ public interface UserService
     boolean userExistsWithId(UUID userId);
 
     UserProfile updateUserScore(UUID uuid, double points);
+
+    void updateRankingsLowerThan(Double points);
 }

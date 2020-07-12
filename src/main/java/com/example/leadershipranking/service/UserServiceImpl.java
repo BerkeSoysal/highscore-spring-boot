@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService
     @Override
     public UserProfile updateUserScore(UUID uuid, double points)
     {
-        return userProfileRepositoryCustom.updateUserPoints(uuid, points);
+        return userProfileRepositoryCustom.updateUserPointsAndRanking(uuid, points);
+    }
+
+    @Override
+    public void updateRankingsLowerThan(Double points)
+    {
+        userProfileRepositoryCustom.updateRankingsLowerThan(points);
     }
 }
