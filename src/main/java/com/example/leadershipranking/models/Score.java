@@ -18,7 +18,8 @@ public class Score
 	@Column(name = "score_worth")
 	private Double scoreWorth;
 
-	public Score() {
+	public Score()
+	{
 
 	}
 

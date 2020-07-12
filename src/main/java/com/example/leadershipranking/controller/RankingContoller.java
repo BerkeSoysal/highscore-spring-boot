@@ -34,17 +34,20 @@ public class RankingContoller
 	}
 
 	@GetMapping("/")
-	public String welcomePage() {
+	public String welcomePage()
+	{
 		return "Welcome to the leadership ranking";
 	}
 
 	@GetMapping("/leaderboard")
-	public Iterable<Score> greetings() {
+	public Iterable<Score> greetings()
+	{
 		return scoreService.getRankings();
 	}
 
 	@GetMapping("/leaderboard/{countryCode}")
-	public ResponseEntity<List<Score>> scores(@PathVariable String countryCode) {
+	public ResponseEntity<List<Score>> scores(@PathVariable String countryCode)
+	{
 		boolean result = Arrays.asList(Locale.getISOCountries()).contains(countryCode);
 		if(result)
 		{

@@ -29,7 +29,8 @@ public class UserProfile
 
     }
 
-    public UserProfile(String displayName, String countryCode) {
+    public UserProfile(String displayName, String countryCode)
+    {
         this.uuid = UUID.randomUUID();
         this.displayName = displayName;
         this.countryCode = countryCode;
