@@ -9,5 +9,7 @@ public interface UserService
 {
     void saveUser(UserProfile user);
 
+    void loadUser(UUID userId);
+
     boolean userExistsWithId(UUID userId);
 }

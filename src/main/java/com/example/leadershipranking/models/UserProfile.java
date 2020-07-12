@@ -1,5 +1,7 @@
 package com.example.leadershipranking.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,18 +14,23 @@ public class UserProfile implements Serializable
 {
     @Id
     @Column(name = "user_id")
+    @JsonProperty("user_id")
     private UUID uuid;
 
     @Column(name = "display_name")
+    @JsonProperty("display_name")
     private String displayName;
 
     @Column(name = "ranking")
+    @JsonProperty("ranking")
     private Long ranking;
 
     @Column(name = "country_code")
+    @JsonProperty("country_code")
     private String countryCode;
 
     @Column(name = "points")
+    @JsonProperty("points")
     private Long points;
 
     public UserProfile() {

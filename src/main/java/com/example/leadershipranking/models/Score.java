@@ -1,5 +1,7 @@
 package com.example.leadershipranking.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,6 +13,7 @@ public class Score implements Serializable
 {
 	@Id
 	@Column(name = "score_id")
+	@JsonProperty("score_id")
 	private UUID id;
 
 	@Column(name = "timestamp")

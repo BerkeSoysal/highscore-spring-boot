@@ -36,20 +36,14 @@ public class UserController
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<Map> createUser(@RequestBody JsonNode jsonUser)
+    public ResponseEntity<UserProfile> createUser(@RequestBody JsonNode jsonUser)
     {
         UserProfile userProfile;
         if(Arrays.asList(Locale.getISOCountries()).contains(jsonUser.get("country_code").asText()))
         {
             userProfile = new UserProfile(jsonUser.get("display_name").asText(), jsonUser.get("country_code").asText());
             userService.saveUser(userProfile);
-            Map<String,Object> map = new HashMap<>();
-            map.put("user_id", userProfile.getUuid());
-            map.put("display_name", userProfile.getDisplayName());
-            map.put("points", userProfile.getPoints());
-            map.put("rank", userProfile.getRanking());
-
-            return new ResponseEntity<>(map, HttpStatus.OK);
+            return new ResponseEntity<>(userProfile, HttpStatus.OK);
         }
         else
         {

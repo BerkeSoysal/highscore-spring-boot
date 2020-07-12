@@ -30,6 +30,12 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
+    public void loadUser(UUID userId)
+    {
+        //userProfileRepository.
+    }
+
+    @Override
     public boolean userExistsWithId(UUID userId)
     {
         return userProfileRepositoryCustom.findIsUserExist(userId);
