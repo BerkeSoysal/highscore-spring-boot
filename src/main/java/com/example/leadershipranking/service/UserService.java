@@ -16,5 +16,5 @@ public interface UserService
 
     void updateRankingsLowerThan(Double points, Double oldPoints);
 
-    List<UserProfile> getUsersOrderByRank();
+    List<UserProfile> getUsersOrderByRank(String countryCode);
 }

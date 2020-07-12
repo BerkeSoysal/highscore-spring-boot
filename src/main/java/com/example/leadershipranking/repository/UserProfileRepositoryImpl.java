@@ -24,14 +24,6 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
     UserProfileRepository userProfileRepository;
 
     @Override
-    public boolean findIsUserExist(UUID uuid)
-    {
-        Query query = entityManager.createQuery("select u from user_profile u where u.uuid = :id")
-                .setParameter("id", uuid);
-        return !query.getResultList().isEmpty();
-    }
-
-    @Override
     public void setRanking(UserProfile user)
     {
         Query query = entityManager.createQuery("select u from user_profile u where u.points > :points")
@@ -83,10 +75,18 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
     }
 
     @Override
-    public List<UserProfile> getUsersOrderByRank()
+    public List<UserProfile> getUsersOrderByRank(String countryCode)
     {
-        Query query = entityManager.createQuery("select u from user_profile u order by u.ranking");
+        Query query;
 
+        if (null != countryCode) {
+            query = entityManager.createQuery("select u from user_profile u where u.countryCode = :countryCode order by u.ranking")
+                    .setParameter("countryCode", countryCode);
+        }
+        else
+        {
+            query = entityManager.createQuery("select u from user_profile u order by u.ranking");
+        }
         return query.getResultList();
     }
 }

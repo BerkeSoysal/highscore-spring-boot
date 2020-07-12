@@ -12,8 +12,6 @@ import java.util.UUID;
 @Repository
 public interface UserProfileRepositoryCustom
 {
-    boolean findIsUserExist(UUID uuid);
-
     void setRanking(UserProfile user);
 
     UserProfile findUserById(UUID userId);
@@ -22,5 +20,5 @@ public interface UserProfileRepositoryCustom
 
     void updateRankingsLowerThan(Double newPoints, Double oldPoints);
 
-    List<UserProfile> getUsersOrderByRank();
+    List<UserProfile> getUsersOrderByRank(String countryCode);
 }

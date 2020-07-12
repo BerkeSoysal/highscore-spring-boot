@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public List<UserProfile> getUsersOrderByRank()
+    public List<UserProfile> getUsersOrderByRank(String countryCode)
     {
-        return userProfileRepositoryCustom.getUsersOrderByRank();
+        return userProfileRepositoryCustom.getUsersOrderByRank(countryCode);
     }
 }

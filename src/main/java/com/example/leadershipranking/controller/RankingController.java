@@ -38,7 +38,7 @@ public class RankingController
 	@GetMapping("/leaderboard")
 	public ResponseEntity<MappingJacksonValue> scoreBoard()
 	{
-		List<UserProfile> userProfiles = userService.getUsersOrderByRank();
+		List<UserProfile> userProfiles = userService.getUsersOrderByRank(null);
 
 		MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userProfiles);
 		FilterProvider filterProvider = new SimpleFilterProvider()
@@ -53,7 +53,7 @@ public class RankingController
 		boolean result = Arrays.asList(Locale.getISOCountries()).contains(countryCode);
 		if(result)
 		{
-			List<UserProfile> userProfiles = userService.getUsersOrderByRank();
+			List<UserProfile> userProfiles = userService.getUsersOrderByRank(countryCode);
 			return new ResponseEntity<>(userProfiles, HttpStatus.OK);
 		}
 		else
