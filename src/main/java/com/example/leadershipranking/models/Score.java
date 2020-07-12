@@ -3,10 +3,11 @@ package com.example.leadershipranking.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(name = "score")
-public class Score
+public class Score implements Serializable
 {
 	@Id
 	@Column(name = "score_id")

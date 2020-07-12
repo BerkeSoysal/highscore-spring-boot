@@ -23,13 +23,11 @@ import java.util.Locale;
 public class RankingContoller
 {
 
-	private final UserService userService;
 	private final ScoreService scoreService;
 
 	@Autowired
-	private RankingContoller(UserService userService, ScoreService scoreService)
+	private RankingContoller(ScoreService scoreService)
 	{
-		this.userService = userService;
 		this.scoreService = scoreService;
 	}
 
@@ -59,24 +57,4 @@ public class RankingContoller
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
  		}
 	}
-
-	@PostMapping(path = "/user/create",
-			consumes = {MediaType.APPLICATION_JSON_VALUE},
-			produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<UserProfile> createUser(@RequestBody JsonNode jsonUser)
-	{
-		UserProfile newUserProfile;
-		if(Arrays.asList(Locale.getISOCountries()).contains(jsonUser.get("country_code").asText()))
-		{
-			newUserProfile = new UserProfile(jsonUser.get("display_name").asText(), jsonUser.get("country_code").asText());
-			userService.saveUser(newUserProfile);
-			scoreService.saveScore(newUserProfile.getScore());
-			return new ResponseEntity<>(newUserProfile, HttpStatus.OK);
-		}
-		else
-		{
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
-
 }

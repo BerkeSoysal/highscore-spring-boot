@@ -4,10 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(name = "user_profile")
-public class UserProfile
+public class UserProfile implements Serializable
 {
     @Id
     @Column(name = "user_id")
@@ -16,14 +17,14 @@ public class UserProfile
     @Column(name = "display_name")
     private String displayName;
 
-    @Transient
-    private Score score;
-
     @Column(name = "ranking")
     private Long ranking;
 
     @Column(name = "country_code")
     private String countryCode;
+
+    @Column(name = "points")
+    private Long points;
 
     public UserProfile() {
 
@@ -34,7 +35,7 @@ public class UserProfile
         this.uuid = UUID.randomUUID();
         this.displayName = displayName;
         this.countryCode = countryCode;
-        this.score = new Score(uuid,0L,0D);
+        this.points = 0L;
     }
 
     public UUID getUuid()
@@ -77,9 +78,14 @@ public class UserProfile
         this.countryCode = countryCode;
     }
 
-    public Score getScore()
+    public Long getPoints()
     {
-        return this.score;
+        return points;
+    }
+
+    public void setPoints(Long points)
+    {
+        this.points = points;
     }
 
     @Override
@@ -88,9 +94,9 @@ public class UserProfile
         return "UserProfile{" +
                 "uuid=" + uuid +
                 ", displayName='" + displayName + '\'' +
-                ", score=" + score +
                 ", ranking=" + ranking +
                 ", countryCode='" + countryCode + '\'' +
+                ", points=" + points +
                 '}';
     }
 }
