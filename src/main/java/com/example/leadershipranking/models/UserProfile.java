@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -25,13 +24,13 @@ public class UserProfile implements Serializable
     @JsonProperty("ranking")
     private Long ranking;
 
-    @Column(name = "country_code")
-    @JsonProperty("country_code")
-    private String countryCode;
-
     @Column(name = "points")
     @JsonProperty("points")
     private Long points;
+
+    @Column(name = "country_code")
+    @JsonProperty("country_code")
+    private String countryCode;
 
     public UserProfile() {
 
@@ -102,8 +101,8 @@ public class UserProfile implements Serializable
                 "uuid=" + uuid +
                 ", displayName='" + displayName + '\'' +
                 ", ranking=" + ranking +
-                ", countryCode='" + countryCode + '\'' +
-                ", points=" + points +
+                ", points='" + points + '\'' +
+                ", countryCode=" + countryCode +
                 '}';
     }
 }
