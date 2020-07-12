@@ -1,6 +1,5 @@
 package com.example.leadershipranking.models;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
@@ -10,7 +9,6 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(name = "user_profile")
-@JsonFilter("leaderBoard")
 public class UserProfile implements Serializable
 {
     @Id
@@ -22,8 +20,8 @@ public class UserProfile implements Serializable
     @JsonProperty("display_name")
     private String displayName;
 
-    @Column(name = "ranking")
-    @JsonProperty("ranking")
+    @Column(name = "rank")
+    @JsonProperty("rank")
     private Long ranking;
 
     @Column(name = "points")
