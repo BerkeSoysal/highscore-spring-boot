@@ -17,7 +17,7 @@ public interface UserService
 
     UserProfile updateUserScore(UUID uuid, double points);
 
-    void updateRankingsLowerThan(Double points);
+    void updateRankingsLowerThan(Double points, Double oldPoints);
 
     List<UserProfile> getUsersOrderByRank();
 }

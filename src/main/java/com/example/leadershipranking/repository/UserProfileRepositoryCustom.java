@@ -20,7 +20,7 @@ public interface UserProfileRepositoryCustom
 
     UserProfile updateUserPointsAndRanking(UUID uuid, double points);
 
-    void updateRankingsLowerThan(Double points);
+    void updateRankingsLowerThan(Double newPoints, Double oldPoints);
 
     List<UserProfile> getUsersOrderByRank();
 }

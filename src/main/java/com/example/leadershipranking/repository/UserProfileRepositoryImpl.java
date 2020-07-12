@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
@@ -68,11 +69,13 @@ public class UserProfileRepositoryImpl implements UserProfileRepositoryCustom
 
     @Override
     @Transactional
-    public void updateRankingsLowerThan(Double points)
+    public void updateRankingsLowerThan(Double newPoints, Double oldPoints)
     {
-        Query query = entityManager.createQuery("select u from user_profile u where u.points < :points")
-                .setParameter("points", points);
+        Query query = entityManager.createQuery("select u from user_profile u where u.points < :points and u.points >= :oldPoints")
+                .setParameter("points", newPoints)
+                .setParameter("oldPoints", oldPoints);
         ArrayList<UserProfile> userProfileList = (ArrayList<UserProfile>) query.getResultList();
+
         for(UserProfile userProfile : userProfileList)
         {
             userProfile.setRanking(userProfile.getRanking() + 1);

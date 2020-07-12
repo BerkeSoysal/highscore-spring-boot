@@ -49,9 +49,9 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public void updateRankingsLowerThan(Double points)
+    public void updateRankingsLowerThan(Double points, Double oldPoints)
     {
-        userProfileRepositoryCustom.updateRankingsLowerThan(points);
+        userProfileRepositoryCustom.updateRankingsLowerThan(points, oldPoints);
     }
 
     @Override

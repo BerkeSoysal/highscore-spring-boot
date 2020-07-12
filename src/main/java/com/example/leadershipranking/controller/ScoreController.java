@@ -32,7 +32,7 @@ public class ScoreController
     {
         UUID userId = UUID.fromString(jsonScore.get("user_id").asText());
         UserProfile userProfile = userService.loadUser(userId);
-
+        double oldPoints = userProfile.getPoints();
         if (null == userProfile)
         {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -40,7 +40,7 @@ public class ScoreController
 
         userService.updateUserScore(userId, jsonScore.get("score_worth").asDouble());
         userProfile = userService.loadUser(userId);
-        userService.updateRankingsLowerThan(userProfile.getPoints());
+        userService.updateRankingsLowerThan(userProfile.getPoints(), oldPoints);
         return new ResponseEntity<>(userService.loadUser(userId), HttpStatus.OK);
     }
 }
